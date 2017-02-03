@@ -1,3 +1,7 @@
+CREATE DATABASE `fastapp`;
+
+USE fastapp;
+
 CREATE TABLE `app` (
 	`app_id` INT(10) UNSIGNED NOT NULL AUTO_INCREMENT COMMENT '应用的app_id',
 	`app_key` VARCHAR(512) NOT NULL COMMENT '应用的app_key',

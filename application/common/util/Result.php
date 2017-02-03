@@ -19,6 +19,9 @@ class Result {
     const APP_KEY_INVALID = 21;
 
 
+    const API_ACCESS_FAIL = 30;
+
+
     private static $defaultMessage = [
         self::OK => '操作成功',
         self::PARAM_INVALID => '参数不合法',
@@ -26,6 +29,8 @@ class Result {
 
         self::APP_NOT_FOUND => '应用不存在',
         self::APP_KEY_INVALID => 'APP_KEY无效',
+
+        self::API_ACCESS_FAIL => 'API访问失败',
 
     ];
 

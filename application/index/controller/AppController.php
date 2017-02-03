@@ -17,7 +17,7 @@ use think\Request;
 class AppController extends CommonController {
 
     public function register(Request $request){
-        $data = $request->get();
+        $data = $request->post();
         if(empty($data)){
             return $this->response(Result::PARAM_INVALID);
         }

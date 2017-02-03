@@ -9,10 +9,11 @@
 namespace ms\sdk;
 
 
+use app\common\util\Result;
+
 class SdkUtils {
 
-    public static function httpPost($url, $data){
-
+    private static function curlPost($url, $data){
         $ch = curl_init();//初始化curl
         curl_setopt($ch,CURLOPT_URL, $url);  //抓取指定网页
         curl_setopt($ch, CURLOPT_HEADER, 0); //设置header
@@ -30,7 +31,7 @@ class SdkUtils {
         return $result;
     }
 
-    public static function httpGet($url){
+    private static function curlGet($url){
         $ch = curl_init();
         curl_setopt($ch, CURLOPT_URL, $url);
         curl_setopt($ch, CURLOPT_HEADER, FALSE);
@@ -44,6 +45,25 @@ class SdkUtils {
         }
         curl_close($ch);
         return $result;
+    }
+
+    /**
+     * post方式请求api   将返回的json格式解析成数组后再返回
+     * @param $url
+     * @param $data
+     * @return mixed
+     */
+    public static function apiPost($url, $data){
+        $result = self::curlPost($url, $data);
+        $resultData = json_decode($result, 1);
+        if(is_null($resultData)){
+            return [
+                'code' => Result::API_ACCESS_FAIL,
+                'message' => Result::getDefaultMessage(Result::API_ACCESS_FAIL),
+                'data' => $result
+            ];
+        }
+        return $resultData;
     }
 
     /**
